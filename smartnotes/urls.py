@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Added URLS
-    path('', include('home.urls'))
+    path('', include('home.urls')),
     # path('home', views.home)
+    path('smart/', include('notes.urls')),
 ]
