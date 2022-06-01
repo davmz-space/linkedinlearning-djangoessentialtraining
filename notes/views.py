@@ -1,12 +1,13 @@
-from doctest import DocFileSuite
 from typing import List
+from doctest import DocFileSuite
 from django.shortcuts import render
 
 from .models import Notes
 from django.http import Http404
 from notes.forms import NotesForm
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.views.generic.edit import DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 # Create your views here.
 class NotesDeleteView(DeleteView):
@@ -24,10 +25,14 @@ class NotesCreateView(CreateView):
     success_url = '/smart/notes'
     form_class = NotesForm
         
-class NoteListView(ListView):
+class NoteListView(LoginRequiredMixin, ListView):
     model = Notes
     context_object_name = "notes"
     template_name = 'notes/notes_list.html'
+    login_url = "/admin"
+
+    def get_queryset(self):
+        return self.request.user.notes.all()
 
 # def list(request):
 #     all_notes = Notes.objects.all()
