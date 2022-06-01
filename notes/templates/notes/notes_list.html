@@ -1,6 +1,17 @@
-{% load static %}
+{% extends "base.html" %}
+<!-- {% load static %} -->
 
-<!DOCTYPE html>
+{% block content %}
+    <h1>These are the notes:</h1>
+
+    <ul>
+        {% for note in notes %}
+            <li class="note-li">{{ note.title }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+<!-- <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -8,7 +19,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Notes List</title>
 
-        <!-- Link Static CSS FILE -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     </head>
 
@@ -21,4 +31,4 @@
             {% endfor %}
         </ul>
     </body>
-</html>
+</html> -->
